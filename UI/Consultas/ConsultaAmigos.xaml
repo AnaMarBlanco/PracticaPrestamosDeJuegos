@@ -1,0 +1,59 @@
+﻿<Window x:Class="PracticaPrestamosDeJuegos.UI.Consultas.ConsultaAmigos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticaPrestamosDeJuegos.UI.Consultas"
+        mc:Ignorable="d"
+        Title="ConsultaAmigos" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10,5,10,0">
+
+            <StackPanel Orientation="Horizontal" Height="58">
+                <StackPanel>
+                    <Label Content="Desde:"/>
+                    <DatePicker x:Name="DesdeDataPicker"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5,0">
+                    <Label Content="Hasta:" />
+                    <DatePicker x:Name="HastaDatePicker"/>
+                </StackPanel>
+
+                <StackPanel Margin="5,0">
+                    <Label Content="Filtro:" />
+                    <ComboBox x:Name="FiltroComboBox" Width="100">
+
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="5,0">
+                    <Label Content="Critero:"/>
+                    <TextBox x:Name="CriterioTextBox" Width="100"/>
+
+                </StackPanel>
+                <Button x:Name="BuscarButton" Height="34" Width="93" Click="ConsultarButton_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                       
+                        <Label Content="Buscar" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" >
+                <DataGrid x:Name="DatosDataGrid" Height="350" Width="668">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID   " Binding="{Binding AmigoId}" Visibility="Visible"/>
+                        <DataGridTextColumn Header="Nombres               " Binding="{Binding Nombres}"/>
+                        <DataGridTextColumn Header="Direccion                  " Binding="{Binding Direccion}"/>
+                        <DataGridTextColumn Header="Telefono             " Binding="{Binding Telefono}"/>
+                        <DataGridTextColumn Header="Celular             " Binding="{Binding Celular}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
