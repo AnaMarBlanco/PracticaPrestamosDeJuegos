@@ -45,6 +45,26 @@ namespace PracticaPrestamosDeJuegos.Migrations
                     b.ToTable("Amigos");
                 });
 
+            modelBuilder.Entity("PracticaPrestamosDeJuegos.Entidades.Entradas", b =>
+                {
+                    b.Property<int>("EntradaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Existencia")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("JuegoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EntradaId");
+
+                    b.ToTable("Entradas");
+                });
+
             modelBuilder.Entity("PracticaPrestamosDeJuegos.Entidades.Juegos", b =>
                 {
                     b.Property<int>("JuegoId")
@@ -99,6 +119,9 @@ namespace PracticaPrestamosDeJuegos.Migrations
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("JuegoId")
                         .HasColumnType("INTEGER");

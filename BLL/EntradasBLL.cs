@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PracticaPrestamosDeJuegos.BLL;
 using PracticaPrestamosDeJuegos.DAL;
 using PracticaPrestamosDeJuegos.Entidades;
 using System;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace PracticaPrestamosDeJuegos.BLL
+namespace PracticaPrestamosDeJuegoss.BLL
 {
-    class PrestamosBLL
+    public class EntradasBLL
     {
         public static bool Existe(int id)
         {
@@ -17,7 +18,7 @@ namespace PracticaPrestamosDeJuegos.BLL
             bool paso = false;
             try
             {
-                paso = contexto.Prestamos.Any(e => e.PrestamoId == id);
+                paso = contexto.Entradas.Any(e => e.EntradaId == id);
             }
             catch (Exception)
             {
@@ -30,28 +31,34 @@ namespace PracticaPrestamosDeJuegos.BLL
             return paso;
         }
 
-        public static bool Guardar(Prestamos Prestamo)
+        public static bool Guardar(Entradas Entrada)
         {
-            if(Prestamo.PrestamoId==0)
-                return Insertar(Prestamo);
+            if (Entrada.EntradaId == 0)
+                return Insertar(Entrada);
             else
             {
-                if (Existe(Prestamo.PrestamoId))
+                if (Existe(Entrada.EntradaId))
                 {
-                    return Modificar(Prestamo);
+                    return Modificar(Entrada);
                 }
                 else
                     return false;
             }
         }
 
-        private static bool Insertar(Prestamos Prestamo)
+        private static bool Insertar(Entradas Entrada)
         {
+            Juegos Juego;
             Contexto contexto = new Contexto();
             bool paso = false;
             try
             {
-                if (contexto.Prestamos.Add(Prestamo) != null) { paso = (contexto.SaveChanges() > 0); }
+                if (contexto.Entradas.Add(Entrada) != null) {
+                    Juego = JuegosBLL.Buscar(Entrada.JuegoId);
+                    Juego.Existencia += Entrada.Existencia;
+                    JuegosBLL.Guardar(Juego);
+                    paso = (contexto.SaveChanges() > 0); 
+                }
             }
             catch (Exception)
             {
@@ -64,19 +71,23 @@ namespace PracticaPrestamosDeJuegos.BLL
             return paso;
         }
 
-        public static bool Modificar(Prestamos Prestamo)
+        public static bool Modificar(Entradas Entrada)
         {
             Contexto contexto = new Contexto();
             bool paso = false;
             try
             {
-                contexto.Database.ExecuteSqlRaw($"Delete FROM PrestamosDetalle Where PrestamoId={Prestamo.PrestamoId}");
-                foreach (var item in Prestamo.Detalles)
-                {
-                    contexto.Entry(item).State = EntityState.Added;
-                }
-                contexto.Entry(Prestamo).State = EntityState.Modified;
                 
+                var anterior = EntradasBLL.Buscar(Entrada.EntradaId);
+                var Juego = JuegosBLL.Buscar(anterior.JuegoId);
+                int cant = anterior.Existencia;
+                Juego.Existencia -= cant;
+                JuegosBLL.Guardar(Juego);
+                
+                var Juego1 = JuegosBLL.Buscar(Entrada.JuegoId);
+                Juego1.Existencia = Entrada.Existencia;
+                JuegosBLL.Guardar(Juego1);
+                contexto.Entry(Entrada).State = EntityState.Modified;
                 paso = (contexto.SaveChanges() > 0);
             }
             catch (Exception)
@@ -96,10 +107,10 @@ namespace PracticaPrestamosDeJuegos.BLL
             bool paso = false;
             try
             {
-                var Prestamo = contexto.Prestamos.Find(id);
-                if (Prestamo != null)
+                var Entrada = contexto.Entradas.Find(id);
+                if (Entrada != null)
                 {
-                    contexto.Prestamos.Remove(Prestamo);
+                    contexto.Entradas.Remove(Entrada);
                     paso = (contexto.SaveChanges() > 0);
                 }
             }
@@ -114,16 +125,14 @@ namespace PracticaPrestamosDeJuegos.BLL
             return paso;
         }
 
-        public static Prestamos Buscar(int id)
+        public static Entradas Buscar(int id)
         {
             Contexto contexto = new Contexto();
-            Prestamos Prestamo = new Prestamos();
+            Entradas Entrada = new Entradas();
             try
             {
-                Prestamo = contexto.Prestamos.Include(x => x.Detalles)
-                    .Where(x => x.PrestamoId == id)
-                    .SingleOrDefault();
-               
+                Entrada = contexto.Entradas.Find(id);
+
             }
             catch (Exception)
             {
@@ -133,16 +142,35 @@ namespace PracticaPrestamosDeJuegos.BLL
             {
                 contexto.Dispose();
             }
-            return Prestamo;
+            return Entrada;
         }
 
-        public static List<Prestamos> GetList(Expression<Func<Prestamos, bool>> criterio)
+        public static List<Entradas> GetList()
         {
             Contexto contexto = new Contexto();
-            List<Prestamos> Lista = new List<Prestamos>();
+            List<Entradas> Lista = new List<Entradas>();
             try
             {
-                Lista = contexto.Prestamos.Where(criterio).ToList();
+                Lista = contexto.Entradas.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return Lista;
+        }
+
+        public static List<Entradas> GetList(Expression<Func<Entradas, bool>> criterio)
+        {
+            Contexto contexto = new Contexto();
+            List<Entradas> Lista = new List<Entradas>();
+            try
+            {
+                Lista = contexto.Entradas.Where(criterio).ToList();
             }
             catch (Exception)
             {

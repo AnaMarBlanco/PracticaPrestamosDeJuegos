@@ -1,4 +1,5 @@
-﻿using PracticaPrestamosDeJuegos.UI.Registros;
+﻿using PracticaPrestamosDeJuegos.UI.Consultas;
+using PracticaPrestamosDeJuegos.UI.Registros;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,30 @@ namespace PracticaPrestamosDeJuegos
         {
             registroPrestamos rp = new registroPrestamos();
             rp.ShowDialog();
+        }
+
+        private void CAmigosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultaAmigos ra = new ConsultaAmigos();
+            ra.ShowDialog();
+        }
+
+        private void CJuegosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultaJuegos rj = new ConsultaJuegos();
+            rj.ShowDialog();
+        }
+
+        private void CPrestamosMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultaPrestamos rp = new ConsultaPrestamos();
+            rp.ShowDialog();
+        }
+
+        private void EntradasMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            RegistroEntradas re = new RegistroEntradas();
+            re.ShowDialog();
         }
     }
 }

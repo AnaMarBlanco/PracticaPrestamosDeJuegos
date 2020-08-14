@@ -47,7 +47,17 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
 
             }
 
-            if(new Contexto().Amigos.Any(p=>p.Nombres == NombresTextBox.Text))
+            if(new Contexto().Amigos.Any(p => p.Celular == CelularTextBox.Text) && Convert.ToInt32(AmigoIdTextBox.Text)==0)
+            {
+                paso = false;
+                GuardarButton.IsEnabled = false;
+                MessageBox.Show("Ya existe un Amigo con este numero", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CelularTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            if(new Contexto().Amigos.Any(p=>p.Nombres == NombresTextBox.Text) && Convert.ToInt32(AmigoIdTextBox.Text) == 0)
             {
                 paso = false;
                 GuardarButton.IsEnabled = false;
@@ -108,13 +118,28 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 AmigoIdTextBox.Focus();
             }
-            if (NombresTextBox.Text.Length == 0)
+            if (!Regex.IsMatch(NombresTextBox.Text, @"^[A-Za-z ]+$"))
             {
+                paso = false;
                 GuardarButton.IsEnabled = false;
-                MessageBox.Show("La direccion no puede estar vacia", "Fallo",
+                MessageBox.Show("Los nombres solo tienen textos ", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                NombresTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+
+            }
+
+            if (NombresTextBox.Text=="Mamaguevo")
+            {
+                paso = false;
+                GuardarButton.IsEnabled = false;
+                MessageBox.Show("Aqui no aceptamos comediantes crack", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 AmigoIdTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+
             }
+
 
 
             return paso;
@@ -153,7 +178,7 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
             var amigo = AmigosBLL.Buscar(Convert.ToInt32(AmigoIdTextBox.Text));
-            if (Amigo != null)
+            if (amigo != null)
             {
                 Amigo = amigo;
                 MessageBox.Show("Amigo encontrado!", "Exito",
@@ -176,6 +201,7 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
             if (paso)
             {
                 Amigo = new Amigos();
+                Limpiar();
                 MessageBox.Show("eliminado correctamente", "Exito",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }

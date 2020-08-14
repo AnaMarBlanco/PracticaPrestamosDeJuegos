@@ -42,21 +42,21 @@ namespace PracticaPrestamosDeJuegos.UI.Consultas
                         break;
 
                     case 2:
-                        listado = AmigosBLL.GetList(e => e.Nombres.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = AmigosBLL.GetList(e => e.Nombres.Contains(CriterioTextBox.Text));
                         break;
 
                     case 3:
-                        listado = AmigosBLL.GetList(e => e.Direccion.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = AmigosBLL.GetList(e => e.Direccion.Contains(CriterioTextBox.Text));
                         break;
                     case 4:
-                        listado = AmigosBLL.GetList(e => e.Telefono.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = AmigosBLL.GetList(e => e.Telefono.Contains(CriterioTextBox.Text));
                         break;
 
                     case 5:
-                        listado = AmigosBLL.GetList(e => e.Celular.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = AmigosBLL.GetList(e => e.Celular.Contains(CriterioTextBox.Text));
                         break;
                     case 6:
-                        listado = AmigosBLL.GetList(e => e.Email.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = AmigosBLL.GetList(e => e.Email.Contains(CriterioTextBox.Text));
                         break;
                 }
             }

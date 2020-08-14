@@ -5,13 +5,12 @@ using System.Text;
 
 namespace PracticaPrestamosDeJuegos.Entidades
 {
-    public class PrestamosDetalle
+    public class Entradas
     {
         [Key]
-        public int Id { get; set; }
-        public int PrestamoId { get; set; }
-        public string Descripcion { get; set; }
+        public int EntradaId { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Now;
         public int JuegoId { get; set; }
-        public int Cantidad { get; set; }
+        public int Existencia{ get; set; }
     }
 }

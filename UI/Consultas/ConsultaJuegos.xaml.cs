@@ -43,7 +43,7 @@ namespace PracticaPrestamosDeJuegos.UI.Consultas
                         break;
 
                     case 2:
-                        listado = JuegosBLL.GetList(e => e.Descripcion.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = JuegosBLL.GetList(e => e.Descripcion.Contains(CriterioTextBox.Text));
                         break;
 
                     case 3:

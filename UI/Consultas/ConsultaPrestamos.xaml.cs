@@ -47,7 +47,7 @@ namespace PracticaPrestamosDeJuegos.UI.Consultas
                         break;
 
                     case 3:
-                        listado = PrestamosBLL.GetList(e => e.Observacion.Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
+                        listado = PrestamosBLL.GetList(e => e.Observacion.Contains(CriterioTextBox.Text));
                         break;
 
                     case 4:

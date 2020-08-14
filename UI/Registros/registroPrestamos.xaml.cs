@@ -3,6 +3,7 @@ using PracticaPrestamosDeJuegos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -90,29 +91,87 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
                 Cargar();
             }
 
+            if(DetalleDataGrid.SelectedIndex==0)
+            {
+                MessageBox.Show("Debe seleccionar la fila a remover", "Exito", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private bool ValidarJuego()
+        {
+            bool paso = true;
+            int id = Convert.ToInt32(JuegoComboBox.SelectedIndex);
+            id = id + 1;
+            
+            Juegos juego = JuegosBLL.Buscar(id);
+
+            if(Convert.ToInt32(JuegoComboBox.SelectedIndex+1)<=0 )
+            {
+                paso = false;
+                AgregarFilaButton.IsEnabled = false;
+                MessageBox.Show("Debe haber almenos 1 Juego elegido", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CantidadTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            if (CantidadTextBox.Text.Length==0)
+            {
+                paso = false;
+                AgregarFilaButton.IsEnabled = false;
+                MessageBox.Show("Debe Elejir una cantidad Apropiada", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CantidadTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            if (Convert.ToInt32(CantidadTextBox.Text)>juego.Existencia)
+            {
+                paso = false;
+                AgregarFilaButton.IsEnabled = false;
+                MessageBox.Show("La cantidad que escogio es mayor a la existente", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CantidadTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            if (!Regex.IsMatch(CantidadTextBox.Text,@"^[0-9]+$"))
+            {
+                paso = false;
+                AgregarFilaButton.IsEnabled = false;
+                MessageBox.Show("Debe agregar una cantidad", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                CantidadTextBox.Focus();
+                GuardarButton.IsEnabled = true;
+            }
+
+            return paso;
         }
 
         private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
         {
-            Juegos juego = JuegosBLL.Buscar(Convert.ToInt32(JuegoComboBox.SelectedIndex));
+            if(!ValidarJuego())
+            { return; }
+            Juegos juego = JuegosBLL.Buscar(Convert.ToInt32(JuegoComboBox.SelectedIndex +1));
             if(juego!=null)
             {
                 
-
                 PrestamosDetalle prd;
                 Prestamo.Detalles.Add(
                     prd = new PrestamosDetalle
                     {
-                        PrestamoId = Convert.ToInt32(PrestamoIdTextBox.Text),
-                        JuegoId = JuegoComboBox.SelectedIndex,
-                        Cantidad = Convert.ToInt32(CantidadTextBox.Text)
+                        PrestamoId = Prestamo.PrestamoId,
+                        JuegoId = JuegoComboBox.SelectedIndex + 1,
+                        Cantidad = Convert.ToInt32(CantidadTextBox.Text),
+                        Descripcion = juego.Descripcion
                     }
-                    );
+                    ) ;
                 Prestamo.CantidadJuegos += prd.Cantidad;
 
                 juego.Existencia -= prd.Cantidad;
                 CantidadJuegosTextBox.Text = Prestamo.CantidadJuegos.ToString();
-                DescripcionGTC = juego.Descripcion;
+                
                 Cargar();
             }
             

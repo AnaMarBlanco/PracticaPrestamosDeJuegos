@@ -71,7 +71,7 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="10,10" Width="200">
                 <Label Content="Cantidad de Juegos"/>
-                <TextBox x:Name="CantidadJuegosTextBox" Text="{Binding CantidadJuegos}" Height="20"/>
+                <TextBox x:Name="CantidadJuegosTextBox" Text="{Binding CantidadJuegos}" Height="20" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10,40">
                 <StackPanel Orientation="Horizontal">

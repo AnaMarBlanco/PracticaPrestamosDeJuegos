@@ -1,5 +1,6 @@
 ﻿using PracticaPrestamosDeJuegos.BLL;
 using PracticaPrestamosDeJuegos.Entidades;
+using PracticaPrestamosDeJuegoss.BLL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,69 +17,57 @@ using System.Windows.Shapes;
 namespace PracticaPrestamosDeJuegos.UI.Registros
 {
     /// <summary>
-    /// Interaction logic for Registrojuegos.xaml
+    /// Interaction logic for RegistroEntradas.xaml
     /// </summary>
-    /// 
-    public partial class Registrojuegos : Window
+    public partial class RegistroEntradas : Window
     {
-        Juegos Juego = new Juegos();
-        public Registrojuegos()
+        Entradas Entrada = new Entradas();
+        public RegistroEntradas()
         {
             InitializeComponent();
-            Juego = new Juegos();
-            this.DataContext = Juego;
+            JuegoIdComboBox.ItemsSource = JuegosBLL.GetList();
+            JuegoIdComboBox.SelectedValuePath = "JuegoId";
+            JuegoIdComboBox.DisplayMemberPath = "Descripcion";
+            Entrada = new Entradas();
+            this.DataContext = Entrada;
         }
 
         private bool validar()
         {
             bool paso = true;
 
-            if(!Regex.IsMatch(JuegoIdTextBox.Text,@"^[0-9]+$"))
+            if (!Regex.IsMatch(EntradaIdTextBox.Text, @"^[0-9]+$"))
             {
                 paso = false;
                 GuardarButton.IsEnabled = false;
                 MessageBox.Show("En este campo solo se permiten numeros", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-                JuegoIdTextBox.Focus();
+                EntradaIdTextBox.Focus();
                 GuardarButton.IsEnabled = true;
             }
 
-            if (PrecioTextBox.Text.Length==0 ||Convert.ToInt32( PrecioTextBox.Text)<=0 || !Regex.IsMatch(PrecioTextBox.Text, @"^[0-9]+$"))
+
+
+            if (ExistenciaTextBox.Text.Length == 0 || Convert.ToInt32(ExistenciaTextBox.Text) <= 0 || !Regex.IsMatch(ExistenciaTextBox.Text, @"^[0-9]+$"))
             {
                 paso = false;
                 GuardarButton.IsEnabled = false;
                 MessageBox.Show("En este campo debe ingresar un valor numerico mayor a 0", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-                PrecioTextBox.Focus();
+                ExistenciaTextBox.Focus();
                 GuardarButton.IsEnabled = true;
             }
 
-            
 
 
-            if (DescripcionTextBox.Text.Length==0)
-            {
-                GuardarButton.IsEnabled = false;
-                MessageBox.Show("La descripcion no puede estar vacia", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                JuegoIdTextBox.Focus();
-            }
-            if (PrecioTextBox.Text.Length == 0 || Convert.ToDouble(PrecioTextBox.Text)<=0)
-            {
-                GuardarButton.IsEnabled = false;
-                MessageBox.Show("El precio no puede estar vacio o ser menor o igual a" +
-                    "0", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                JuegoIdTextBox.Focus();
-            }
 
             return paso;
         }
 
         private void Limpiar()
         {
-            Juego = new Juegos();
-            this.DataContext = Juego;
+            Entrada = new Entradas();
+            this.DataContext = Entrada;
 
         }
 
@@ -89,12 +78,12 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!validar())
+            if (!validar())
             {
                 return;
             }
 
-            bool paso = JuegosBLL.Guardar(Juego);
+            bool paso = EntradasBLL.Guardar(Entrada);
 
             if (paso)
             {
@@ -107,30 +96,30 @@ namespace PracticaPrestamosDeJuegos.UI.Registros
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            var juego = JuegosBLL.Buscar(Convert.ToInt32(JuegoIdTextBox.Text));
-            if(juego != null)
+            var juego = EntradasBLL.Buscar(Convert.ToInt32(EntradaIdTextBox.Text));
+            if (juego != null)
             {
-                Juego = juego;
+                Entrada = juego;
                 MessageBox.Show("Juego encontrado!", "Exito",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             else
             {
-                Juego = new Juegos();
-                MessageBox.Show("Este juego no existe!", "Fallo",
+                Entrada = new Entradas();
+                MessageBox.Show("Este Entrada no existe!", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            this.DataContext = Juego;
+            this.DataContext = Entrada;
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            bool paso = JuegosBLL.Eliminar(Convert.ToInt32(JuegoIdTextBox.Text));
+            bool paso = EntradasBLL.Eliminar(Convert.ToInt32(EntradaIdTextBox.Text));
 
             if (paso)
             {
-                Juego = new Juegos();
+                Entrada = new Entradas();
                 Limpiar();
                 MessageBox.Show("eliminado correctamente", "Exito",
                     MessageBoxButton.OK, MessageBoxImage.Information);

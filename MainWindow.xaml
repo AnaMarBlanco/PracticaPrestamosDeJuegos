@@ -10,13 +10,15 @@
         <Menu>
             <MenuItem Header="Registros">
                 <MenuItem Header="Amigos" x:Name="AmigosMenuItem" Click="RAmigosMenuItem_Click"></MenuItem>
-                <MenuItem Header="juegos" x:Name="JuegosMenuItem" Click="RJuegosMenuItem_Click"></MenuItem>
-                <MenuItem Header="Prestamos" x:Name="PrestamosMenuItem" Click="RPrestamosMenuItem_Click" ></MenuItem>
+                <MenuItem Header="Juegos" x:Name="JuegosMenuItem" Click="RJuegosMenuItem_Click"></MenuItem>
+                <MenuItem Header="Entradas" x:Name="EntradasMenuItem" Click="EntradasMenuItem_Click"></MenuItem>
+            <MenuItem Header="Prestamos" x:Name="PrestamosMenuItem" Click="RPrestamosMenuItem_Click" ></MenuItem>
             </MenuItem>
             <MenuItem Header="Consultas">
-                <MenuItem></MenuItem>
-                <MenuItem></MenuItem>
-                <MenuItem></MenuItem>
+                <MenuItem Header="Amigos" Click="CAmigosMenuItem_Click"></MenuItem>
+                <MenuItem Header="Juegos"  Click="CJuegosMenuItem_Click"></MenuItem>
+                <MenuItem Header="Prestamos"  Click="CPrestamosMenuItem_Click" ></MenuItem>
+
             </MenuItem>
             <MenuItem Header="Ayuda"></MenuItem>
         </Menu>

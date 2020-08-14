@@ -26,6 +26,21 @@ namespace PracticaPrestamosDeJuegos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Entradas",
+                columns: table => new
+                {
+                    EntradaId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    JuegoId = table.Column<int>(nullable: false),
+                    Existencia = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Entradas", x => x.EntradaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Juegos",
                 columns: table => new
                 {
@@ -64,6 +79,7 @@ namespace PracticaPrestamosDeJuegos.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PrestamoId = table.Column<int>(nullable: false),
+                    Descripcion = table.Column<string>(nullable: true),
                     JuegoId = table.Column<int>(nullable: false),
                     Cantidad = table.Column<int>(nullable: false)
                 },
@@ -88,6 +104,9 @@ namespace PracticaPrestamosDeJuegos.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Amigos");
+
+            migrationBuilder.DropTable(
+                name: "Entradas");
 
             migrationBuilder.DropTable(
                 name: "Juegos");
