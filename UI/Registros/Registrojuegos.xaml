@@ -12,8 +12,9 @@
                 <Label Content="JuegoId"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="JuegoIdTextBox" Width="100" Height="20" Text="{Binding JuegoId}"  Margin="0,0,10,0"/>
-                    <Button x:Name="BuscarButton" Click="BuscarButton_Click" >
+                    <Button x:Name="BuscarButton" Click="BuscarButton_Click" Height="27" Width="76" >
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="search.png"/>
                             <Label Content="Buscar"/>
                         </StackPanel>
                     </Button>
@@ -21,46 +22,49 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical">
-                    <Label Content="Fecha de Compra"/>
-                    <DatePicker x:Name="FechaDatePicker" SelectedDate="{Binding Fecha}"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Decripcion"/>
-                    <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Height="20"/>
-                </StackPanel>
+                <Label Content="Fecha de Compra"/>
+                <DatePicker x:Name="FechaDatePicker" SelectedDate="{Binding Fecha}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Content="Decripcion"/>
+                <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Height="20"/>
+            </StackPanel>
 
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Precio"/>
-                    <TextBox x:Name="PrecioTextBox" Text="{Binding Precio}" Height="20"/>
-                </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Content="Precio"/>
+                <TextBox x:Name="PrecioTextBox" Text="{Binding Precio}" Height="20"/>
+            </StackPanel>
 
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Existencia"/>
-                    <TextBox x:Name="ExistenciaTextBox" Text="{Binding Existencia}"   Height="20"/>
-                    
-                </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Content="Existencia"/>
+                <TextBox x:Name="ExistenciaTextBox" Text="{Binding Existencia}"   Height="20"/>
+
+            </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,20">
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="NuevoButton" Margin="10,0" Click="NuevoButton_Click">
+                    <Button x:Name="NuevoButton" Margin="10,0" Click="NuevoButton_Click" Height="30" Width="84">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="new-file.png"/>
                             <Label Content="Nuevo"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="GuardarButton" Margin="10,0" Click="GuardarButton_Click">
+                    <Button x:Name="GuardarButton" Margin="10,0" Height="30" Width="84" Click="GuardarButton_Click">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="save.png"/>
                             <Label Content="Guardar"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="EliminarButton" Click="EliminarButton_Click" Margin="10,0">
+                    <Button x:Name="EliminarButton" Height="30" Width="84" Click="EliminarButton_Click" Margin="10,0">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="delete.png"/>
                             <Label Content="Eliminar"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
             </StackPanel>
 
-            
-            
+
+
         </StackPanel>
     </Grid>
 </Window>

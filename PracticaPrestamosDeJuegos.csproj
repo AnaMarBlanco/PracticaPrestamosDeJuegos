@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="UI\Registros\delete.png" />
+    <None Remove="UI\Registros\new-file.png" />
+    <None Remove="UI\Registros\save.png" />
+    <None Remove="UI\Registros\search.png" />
+    <None Remove="UI\Registros\Sin título-1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
 
@@ -17,6 +25,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Registros\delete.png" />
+    <Resource Include="UI\Registros\new-file.png" />
+    <Resource Include="UI\Registros\save.png" />
+    <Resource Include="UI\Registros\search.png" />
+    <Resource Include="UI\Registros\Sin título-1.png" />
   </ItemGroup>
 
 </Project>

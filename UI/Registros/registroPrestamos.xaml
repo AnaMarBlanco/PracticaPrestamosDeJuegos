@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticaPrestamosDeJuegos.UI.Registros"
         mc:Ignorable="d"
-        Title="registroPrestamos" Height="720" Width="500">
+        Title="registroPrestamos" Height="720" Width="500"  >
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10,10">
             <StackPanel Orientation="Vertical" >
                 <Label Content="PrestamoId"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="PrestamoIdTextBox" Text="{Binding PrestamoId}" Width="100" Height="20" Margin="0,0,20,0"/>
-                    <Button x:Name="BuscarButton" Click="BuscarButton_Click" >
+                    <TextBox x:Name="PrestamoIdTextBox" Text="{Binding PrestamoId}" Width="100" Height="25" Margin="0,0,20,0" RenderTransformOrigin="0.5,0.5"/>
+
+                    <Button x:Name="BuscarButton" Click="BuscarButton_Click" Width="84" Height="30" >
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="search.png"/>
                             <Label Content="Buscar"/>
                         </StackPanel>
                     </Button>
@@ -30,20 +32,21 @@
                     <StackPanel Orientation="Horizontal" Margin="10,10">
                         <StackPanel Orientation="Vertical" Margin="10,0" >
                             <Label Content="Juego"/>
-                            <ComboBox x:Name="JuegoComboBox" SelectedIndex="{Binding JuegoId}" Width="208"/>
+                            <ComboBox x:Name="JuegoComboBox" SelectedIndex="{Binding JuegoId}" Width="175"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="10,0">
                             <Label Content="Cantidad"/>
                             <TextBox x:Name="CantidadTextBox" Width="107" Height="20"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Button x:Name="AgregarFilaButton" Click="AgregarFilaButton_Click" VerticalAlignment="Center" Margin="0,20,0,0">
+                            <Button x:Name="AgregarFilaButton" Width="123" Height="34" Click="AgregarFilaButton_Click" Margin="0,20,0,0">
                                 <StackPanel Orientation="Horizontal">
+                                    <Image Source="new-file.png"/>
                                     <Label Content="Agregar Fila"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
-                       
+
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10,10">
                         <DataGrid x:Name="DetalleDataGrid" Height="200" ItemsSource="{Binding Detalles}" AutoGenerateColumns="False"  >
@@ -51,14 +54,15 @@
                                 <DataGridTextColumn Header="id" Visibility="Hidden" Binding="{Binding Id}"  />
                                 <DataGridTextColumn Header="PrestamoId" Visibility="Hidden" Binding="{Binding PrestamoId}"/>
                                 <DataGridTextColumn x:Name="DescripcionGTC" Header="JuegoId" Binding="{Binding JuegoId}"/>
-                                    <DataGridTextColumn Header="Descripción                                           " Binding="{Binding Descripcion}"/>
+                                <DataGridTextColumn Header="Descripción                                           " Binding="{Binding Descripcion}"/>
                                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Button x:Name="RemoverFilaButton" HorizontalAlignment="Right" Margin="0,0,10,0" Click="RemoverFilaButton_Click" >
+                        <Button x:Name="RemoverFilaButton"  Width="84" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0" Click="RemoverFilaButton_Click" >
                             <StackPanel Orientation="Horizontal">
+                                <Image Source="delete.png"/>
                                 <Label Content="Remover Fila"/>
                             </StackPanel>
                         </Button>
@@ -75,18 +79,21 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10,40">
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="10,0" x:Name="NuevoButton" Click="NuevoButton_Click">
+                    <Button Margin="10,0" Width="84" Height="30" x:Name="NuevoButton" Click="NuevoButton_Click">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="new-file.png"/>
                             <Label Content="Nuevo"/>
                         </StackPanel>
                     </Button>
-                    <Button Margin="10,0"  x:Name="GuardarButton" Click="GuardarButton_Click">
+                    <Button Margin="10,0" Width="84" Height="30"  x:Name="GuardarButton" Click="GuardarButton_Click">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="save.png"/>
                             <Label Content="Guardar"/>
                         </StackPanel>
                     </Button>
-                    <Button Margin="10,0" x:Name="EliminarButton" Click="EliminarButton_Click">
+                    <Button Margin="10,0" Width="84" Height="30" x:Name="EliminarButton" Click="EliminarButton_Click">
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="delete.png"/>
                             <Label Content="Eliminar"/>
                         </StackPanel>
                     </Button>
