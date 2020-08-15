@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="UI\Consultas\search.png" />
     <None Remove="UI\Registros\delete.png" />
     <None Remove="UI\Registros\new-file.png" />
     <None Remove="UI\Registros\save.png" />
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="UI\Consultas\search.png" />
     <Resource Include="UI\Registros\delete.png" />
     <Resource Include="UI\Registros\new-file.png" />
     <Resource Include="UI\Registros\save.png" />

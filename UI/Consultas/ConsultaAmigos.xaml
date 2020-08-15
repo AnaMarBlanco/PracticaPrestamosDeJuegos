@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticaPrestamosDeJuegos.UI.Consultas"
         mc:Ignorable="d"
-        Title="ConsultaAmigos" Height="450" Width="800">
+        Title="Consulta de Amigos" Height="450" Width="800">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10,5,10,0">
 
@@ -17,6 +17,7 @@
 
                 <StackPanel Orientation="Vertical" Margin="5,0">
                     <Label Content="Hasta:" />
+
                     <DatePicker x:Name="HastaDatePicker"/>
                 </StackPanel>
 
@@ -32,11 +33,12 @@
                     <TextBox x:Name="CriterioTextBox" Width="100"/>
 
                 </StackPanel>
-                <Button x:Name="BuscarButton" Height="34" Width="93" Click="ConsultarButton_Click" >
-                    <StackPanel Orientation="Horizontal" >
-                       
-                        <Label Content="Buscar" />
+                <Button x:Name="BuscarButton"  Click="ConsultarButton_Click" Height="28" Width="75" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="image"  Source="/UI/Consultas/search.png" Stretch="Uniform"/>
+                        <Label Content="Buscar"/>
                     </StackPanel>
+                    
                 </Button>
 
             </StackPanel>
@@ -49,7 +51,7 @@
                         <DataGridTextColumn Header="Telefono             " Binding="{Binding Telefono}"/>
                         <DataGridTextColumn Header="Celular             " Binding="{Binding Celular}"/>
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                        
+
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
